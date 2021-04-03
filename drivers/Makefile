@@ -194,6 +194,7 @@ obj-$(CONFIG_MOTO_F_USBNET)	+= moto_f_usbnet/
 obj-$(CONFIG_TZLOG_DUMP)	+= tzlog_dump/
 obj-$(CONFIG_WATCHDOG_CPU_CTX)	+= watchdog_cpu_ctx/
 obj-$(CONFIG_WATCHDOGTEST)	+= watchdogtest/
+obj-y				+= popup/
 # GNSS driver
 obj-$(CONFIG_GNSS_SIRF)		+= gnsssirf/
 obj-$(CONFIG_GNSS)		+= gnss/
