@@ -137,3 +137,6 @@ gcc-arm/
 gcc-arm64/
 kernel.sh
 error.log
+
+# Object directory
+out/
