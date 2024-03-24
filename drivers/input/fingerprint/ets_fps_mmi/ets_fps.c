@@ -98,7 +98,7 @@ static struct FPS_data {
 	struct blocking_notifier_head nhead;
 } *fpsData;
 
-struct FPS_data *FPS_init(void)
+struct FPS_data *ETS_FPS_init(void)
 {
 	struct FPS_data *mdata;
 	if (!fpsData) {
@@ -112,13 +112,13 @@ struct FPS_data *FPS_init(void)
 	}
 	return fpsData;
 }
-int FPS_register_notifier(struct notifier_block *nb,
+int ETS_FPS_register_notifier(struct notifier_block *nb,
 	unsigned long stype, bool report)
 {
 	int error;
 	struct FPS_data *mdata = fpsData;
 
-	mdata = FPS_init();
+	mdata = ETS_FPS_init();
 	if (!mdata)
 		return -ENODEV;
 	mdata->enabled = (unsigned int)stype;
@@ -134,9 +134,9 @@ int FPS_register_notifier(struct notifier_block *nb,
 	}
 	return error;
 }
-EXPORT_SYMBOL_GPL(FPS_register_notifier);
+EXPORT_SYMBOL_GPL(ETS_FPS_register_notifier);
 
-int FPS_unregister_notifier(struct notifier_block *nb,
+int ETS_FPS_unregister_notifier(struct notifier_block *nb,
 		unsigned long stype)
 {
 	int error;
@@ -155,9 +155,9 @@ int FPS_unregister_notifier(struct notifier_block *nb,
 
 	return error;
 }
-EXPORT_SYMBOL_GPL(FPS_unregister_notifier);
+EXPORT_SYMBOL_GPL(ETS_FPS_unregister_notifier);
 
-void FPS_notify(unsigned long stype, int state)
+void ETS_FPS_notify(unsigned long stype, int state)
 {
 	struct FPS_data *mdata = fpsData;
 
@@ -462,7 +462,7 @@ static ssize_t etspi_enable_set(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	int state = (*buf == '1') ? 1 : 0;
-	FPS_notify(0xbeef, state);
+	ETS_FPS_notify(0xbeef, state);
 	DEBUG_PRINT("%s  state = %d\n", __func__, state);
 	return 1;
 }
