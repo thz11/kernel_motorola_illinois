@@ -1915,7 +1915,7 @@ static void xudc_ep0_in(struct xusb_udc *udc)
 			ep0rambase = (u8 __force *) (udc->addr +
 				     (ep0->rambase << 2));
 			buffer = req->usb_req.buf + req->usb_req.actual;
-			req->usb_req.actual = req->usb_req.actual + length;
+			req->usb_req.actual = req->usb_req.actual + length;D
 			memcpy_toio(ep0rambase, buffer, length);
 		}
 		udc->write_fn(udc->addr, XUSB_EP_BUF0COUNT_OFFSET, count);
@@ -1940,11 +1940,7 @@ static void xudc_ctrl_ep_handler(struct xusb_udc *udc, u32 intrstatus)
 		xudc_handle_setup(udc);
 	} else {
 		if (intrstatus & XUSB_STATUS_FIFO_BUFF_RDY_MASK)
-			xudc_ep0_out(udc);
 		else if (intrstatus & XUSB_STATUS_FIFO_BUFF_FREE_MASK)
-			xudc_ep0_in(udc);
-	}
-}
 
 /**
  * xudc_nonctrl_ep_handler - Non control endpoint interrupt handler.
